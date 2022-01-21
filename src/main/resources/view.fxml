@@ -23,10 +23,10 @@
               <items>
                   <Menu mnemonicParsing="false" text="Content">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Float" />
-                        <MenuItem mnemonicParsing="false" text="Int" />
-                        <MenuItem mnemonicParsing="false" text="String" />
-                        <MenuItem mnemonicParsing="false" text="Image" />
+                      <MenuItem mnemonicParsing="false" onAction="#create_float" text="Float" />
+                        <MenuItem mnemonicParsing="false" onAction="#create_int" text="Int" />
+                        <MenuItem mnemonicParsing="false" onAction="#create_string" text="String" />
+                        <MenuItem mnemonicParsing="false" onAction="#create_image" text="Image" />
                     </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Apply content">

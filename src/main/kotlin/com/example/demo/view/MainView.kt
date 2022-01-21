@@ -21,8 +21,31 @@ class MainView : View("Node IMG Editor") {
     val node_container: AnchorPane by fxid()
 
     init {
-        node_container.children.add(int_node())
+        node_container.children.add(input_image_node())
+        node_container.children.add(output_image_node())
+    }
+
+    fun create_float(){
         node_container.children.add(float_node())
+    }
+
+    fun create_int(){
+        node_container.children.add(int_node())
+    }
+
+    fun create_string(){
+        node_container.children.add(string_node())
+    }
+
+    fun create_image(){
         node_container.children.add(image_node())
+    }
+
+    fun create_add_text(){
+        node_container.children.add(add_text_node())
+    }
+
+    fun create_add_image(){
+        node_container.children.add(add_image_node())
     }
 }
