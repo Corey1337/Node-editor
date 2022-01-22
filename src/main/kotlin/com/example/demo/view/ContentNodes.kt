@@ -14,6 +14,7 @@ import javafx.stage.Stage
 import javafx.util.converter.FloatStringConverter
 import tornadofx.*
 import java.io.File
+import java.util.*
 import javax.imageio.ImageIO
 
 
@@ -38,7 +39,7 @@ class float_node : DraggableNode(){
             }
         }
 
-        node_content.add(rectangle{
+        node_content.add(rectangle{ //output node
             width = 15.0
             height = 15.0
             stroke = Color.AQUA
@@ -69,7 +70,7 @@ class int_node : DraggableNode(){
             }
         }
 
-        node_content.add(rectangle{
+        node_content.add(rectangle{ //output node
             width = 15.0
             height = 15.0
             stroke = Color.AQUA
@@ -92,7 +93,7 @@ class string_node : DraggableNode(){
 
         node_content.add(string_field)
 
-        node_content.add(rectangle{
+        node_content.add(rectangle{ //output node
             width = 15.0
             height = 15.0
             stroke = Color.AQUA
@@ -115,12 +116,13 @@ class image_node : DraggableNode(){
     init {
         node_name.text = "Image"
         node_content.add(fileButton)
-        node_content.add(rectangle{
+        node_content.add(rectangle{ //output node
             width = 15.0
             height = 15.0
             stroke = Color.AQUA
             AnchorPane.setRightAnchor(this, 7.0)
             AnchorPane.setBottomAnchor(this, 15.0)
+
         })
 
         fileButton.onAction = EventHandler {
@@ -143,7 +145,7 @@ class input_image_node : DraggableNode(){
         text = "Select Image"
         AnchorPane.setBottomAnchor(this, 10.0)
         Platform.runLater { AnchorPane.setLeftAnchor(this, (node_content.width/2 - this.width/2).toDouble()) }
-
+        val abc = 1
     }
     private var image: Image? = null
     private var file: File? = null
@@ -152,12 +154,22 @@ class input_image_node : DraggableNode(){
         (this.delete_node_but.parent as Pane).children.remove(this.delete_node_but)
         node_name.text = "Input"
         node_content.add(fileButton)
-        node_content.add(rectangle{
+        node_content.add(rectangle{ //output node
             width = 15.0
             height = 15.0
             stroke = Color.AQUA
             AnchorPane.setRightAnchor(this, 7.0)
             AnchorPane.setBottomAnchor(this, 15.0)
+            val var_type = "image"
+            val type = "out"
+            id = UUID.randomUUID().toString()
+
+            onMouseClicked = EventHandler {
+                //println(type)
+                from_var = var_type
+                from_type = type
+                from = this
+            }
         })
 
         Platform.runLater { node_layout.layoutY = node_content.height }
@@ -185,12 +197,26 @@ class output_image_node : DraggableNode(){
     init {
         (this.delete_node_but.parent as Pane).children.remove(this.delete_node_but)
         node_name.text = "Output"
-        node_content.add(rectangle{
+        node_content.add(rectangle{ //input node
             width = 15.0
             height = 15.0
             stroke = Color.AQUA
             AnchorPane.setLeftAnchor(this, 7.0)
             AnchorPane.setBottomAnchor(this, 15.0)
+            val var_type = "image"
+            val type = "in"
+            id = UUID.randomUUID().toString()
+
+            onMouseClicked = EventHandler {
+                //println(type)
+                if (from != null && from?.id != to?.id) {
+                    to_var = var_type
+                    to_type = type
+                    to = this
+                    println(from.toString() + " " + to.toString())
+                    a()
+                }
+            }
         })
 
         Platform.runLater { node_layout.layoutY = node_content.height }

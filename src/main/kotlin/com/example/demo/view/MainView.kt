@@ -12,8 +12,36 @@ import javafx.scene.input.ClipboardContent
 import javafx.scene.input.TransferMode
 import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.BorderPane
+import javafx.scene.layout.Pane
 import javafx.scene.layout.VBox
+import javafx.scene.shape.Line
+import javafx.scene.shape.Rectangle
 import tornadofx.*
+
+var from: Rectangle? = null
+var to: Rectangle? = null
+var from_type: String? = null
+var to_type: String? = null
+var from_var: String? = null
+var to_var: String? = null
+
+
+fun a(){
+    if (from_type != to_type && from_var == to_var)
+    {
+        println("con")
+        var par = from?.parent?.parent
+        var mot = to?.parent?.parent
+        var cont = par?.parent
+
+        cont?.add(Line(par!!.layoutX.toDouble(), par.layoutY.toDouble(), mot!!.layoutX.toDouble(), mot.layoutY.toDouble()))
+        println(par?.id)
+        println(cont?.getChildList())
+
+        from = null
+        to = null
+    }
+}
 
 class MainView : View("Node IMG Editor") {
     override val root: VBox by fxml("/view.fxml")
@@ -21,8 +49,10 @@ class MainView : View("Node IMG Editor") {
     val node_container: AnchorPane by fxid()
 
     init {
+
         node_container.children.add(input_image_node())
         node_container.children.add(output_image_node())
+        node_container.children.add(add_text_node())
     }
 
     fun create_float(){

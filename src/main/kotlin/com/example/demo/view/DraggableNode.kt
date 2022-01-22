@@ -2,11 +2,13 @@ package com.example.demo.view
 
 import javafx.event.EventHandler
 import javafx.fxml.FXMLLoader
+import javafx.scene.Cursor
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.image.ImageView
 import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.Pane
+import java.util.*
 import kotlin.properties.Delegates
 
 open class DraggableNode: AnchorPane() {
@@ -25,19 +27,18 @@ open class DraggableNode: AnchorPane() {
         fxmlLoader.setRoot(this)
         fxmlLoader.setController(this)
         fxmlLoader.load<DraggableNode>()
+        node_name.cursor = Cursor.MOVE
+
+        id = UUID.randomUUID().toString()
 
         node_name.setOnMousePressed { mouseEvent ->
             mouseAnchorX = mouseEvent.x
             mouseAnchorY = mouseEvent.y + 30 // w/o dont work normally
-            //println("x:" + mouseAnchorX)
-            //println("y:" + mouseAnchorY)
         }
         node_name.setOnMouseDragged { mouseEvent ->
             //if(node_layout.layoutX >= 0 && node_layout.layoutY >= 0) { //mb todo: collision
                 node_layout.layoutX = mouseEvent.sceneX - mouseAnchorX
                 node_layout.layoutY = mouseEvent.sceneY - mouseAnchorY
-//                println("x:" + node_layout.layoutX)
-//                println("y:" + node_layout.layoutY)
 
         }
     }
