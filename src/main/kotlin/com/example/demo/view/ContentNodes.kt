@@ -6,6 +6,7 @@ import javafx.event.EventHandler
 import javafx.scene.control.TextField
 import javafx.scene.control.cell.TextFieldTableCell
 import javafx.scene.image.Image
+import javafx.scene.image.ImageView
 import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.Pane
 import javafx.scene.paint.Color
@@ -27,25 +28,24 @@ class float_node : DraggableNode(){
     }
 
     init {
+        (this.refresh_node_but.parent as Pane).children.remove(this.refresh_node_but)
+
         node_name.text = "Float"
 
         (this.ImageView.parent as Pane).children.remove(this.ImageView)
 
         node_content.add(float_field)
 
+        val out = out_()
+        out.var_type = "float"
+        node_content.add(out) //output node
+
         float_field.textProperty().addListener { _, oldvalue, newvalue ->
             if (!newvalue.matches("\\d{0,7}([\\.]\\d{0,4})?".toRegex())) {
                 float_field.text = oldvalue;
             }
+            out.content = float_field.text.toDouble().toString()
         }
-
-        node_content.add(rectangle{ //output node
-            width = 15.0
-            height = 15.0
-            stroke = Color.AQUA
-            AnchorPane.setRightAnchor(this, 7.0)
-            AnchorPane.setBottomAnchor(this, 15.0)
-        })
     }
 }
 
@@ -58,25 +58,23 @@ class int_node : DraggableNode(){
     }
 
     init {
+        (this.refresh_node_but.parent as Pane).children.remove(this.refresh_node_but)
+
         node_name.text = "Int"
 
         (this.ImageView.parent as Pane).children.remove(this.ImageView)
 
-        node_content.add(int_field)
+        val out = out_()
+        out.var_type = "int"
+        node_content.add(out) //output node
 
+        node_content.add(int_field)
         int_field.textProperty().addListener { _, oldvalue, newvalue ->
             if (!newvalue.matches("\\d{0,7}?".toRegex())) {
                 int_field.text = oldvalue;
             }
+            out.content = int_field.text.toInt().toString()
         }
-
-        node_content.add(rectangle{ //output node
-            width = 15.0
-            height = 15.0
-            stroke = Color.AQUA
-            AnchorPane.setRightAnchor(this, 7.0)
-            AnchorPane.setBottomAnchor(this, 15.0)
-        })
     }
 }
 
@@ -87,19 +85,21 @@ class string_node : DraggableNode(){
         AnchorPane.setTopAnchor(this, 60.0)
     }
     init {
+        (this.refresh_node_but.parent as Pane).children.remove(this.refresh_node_but)
+
         node_name.text = "String"
 
         (this.ImageView.parent as Pane).children.remove(this.ImageView)
 
         node_content.add(string_field)
 
-        node_content.add(rectangle{ //output node
-            width = 15.0
-            height = 15.0
-            stroke = Color.AQUA
-            AnchorPane.setRightAnchor(this, 7.0)
-            AnchorPane.setBottomAnchor(this, 15.0)
-        })
+        val out = out_()
+        out.var_type = "string"
+        node_content.add(out) //output node
+
+        string_field.textProperty().addListener { _, oldvalue, newvalue ->
+            out.content = string_field.text
+        }
     }
 }
 
@@ -114,16 +114,15 @@ class image_node : DraggableNode(){
     private var file: File? = null
 
     init {
-        node_name.text = "Image"
-        node_content.add(fileButton)
-        node_content.add(rectangle{ //output node
-            width = 15.0
-            height = 15.0
-            stroke = Color.AQUA
-            AnchorPane.setRightAnchor(this, 7.0)
-            AnchorPane.setBottomAnchor(this, 15.0)
+        (this.refresh_node_but.parent as Pane).children.remove(this.refresh_node_but)
 
-        })
+        node_name.text = "Image"
+
+        node_content.add(fileButton)
+
+        val out = out_()
+        out.var_type = "image"
+        node_content.add(out) //output node
 
         fileButton.onAction = EventHandler {
             val fileChooser = FileChooser()
@@ -135,6 +134,7 @@ class image_node : DraggableNode(){
             catch (e: Exception) { }
             if(image !== null){
                 this.ImageView.image = image
+                out.content = image
             }
         }
     }
@@ -152,25 +152,14 @@ class input_image_node : DraggableNode(){
 
     init {
         (this.delete_node_but.parent as Pane).children.remove(this.delete_node_but)
+        (this.refresh_node_but.parent as Pane).children.remove(this.refresh_node_but)
+
         node_name.text = "Input"
         node_content.add(fileButton)
-        node_content.add(rectangle{ //output node
-            width = 15.0
-            height = 15.0
-            stroke = Color.AQUA
-            AnchorPane.setRightAnchor(this, 7.0)
-            AnchorPane.setBottomAnchor(this, 15.0)
-            val var_type = "image"
-            val type = "out"
-            id = UUID.randomUUID().toString()
 
-            onMouseClicked = EventHandler {
-                //println(type)
-                from_var = var_type
-                from_type = type
-                from = this
-            }
-        })
+        val out = out_()
+        out.var_type = "image"
+        node_content.add(out) //output node
 
         Platform.runLater { node_layout.layoutY = node_content.height }
         Platform.runLater { node_layout.layoutX = node_content.width}
@@ -185,6 +174,7 @@ class input_image_node : DraggableNode(){
             catch (e: Exception) { }
             if(image !== null){
                 this.ImageView.image = image
+                out.content = image
             }
         }
     }
@@ -196,30 +186,24 @@ class output_image_node : DraggableNode(){
 
     init {
         (this.delete_node_but.parent as Pane).children.remove(this.delete_node_but)
-        node_name.text = "Output"
-        node_content.add(rectangle{ //input node
-            width = 15.0
-            height = 15.0
-            stroke = Color.AQUA
-            AnchorPane.setLeftAnchor(this, 7.0)
-            AnchorPane.setBottomAnchor(this, 15.0)
-            val var_type = "image"
-            val type = "in"
-            id = UUID.randomUUID().toString()
 
-            onMouseClicked = EventHandler {
-                //println(type)
-                if (from != null && from?.id != to?.id) {
-                    to_var = var_type
-                    to_type = type
-                    to = this
-                    println(from.toString() + " " + to.toString())
-                    a()
-                }
-            }
-        })
+        node_name.text = "Output"
+
+        var inp = in_()
+        inp.var_type = "image"
+        node_content.add(inp) //input node
 
         Platform.runLater { node_layout.layoutY = node_content.height }
         Platform.runLater { node_layout.layoutX = 5 * node_content.width}
+
+        this.refresh_node_but.onAction = EventHandler {
+            this.full_upd()
+            this.on_refresh(inp.id)
+        }
+    }
+
+    fun on_refresh(id: String?) {
+        (node_content.children.filter { it.id == "ImageView" }.first() as ImageView).image =
+            (node_content.children.filter { it.id == id }.first() as in_).content as Image?
     }
 }
