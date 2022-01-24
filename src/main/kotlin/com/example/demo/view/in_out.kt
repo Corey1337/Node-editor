@@ -26,14 +26,22 @@ class in_(b: Double = 15.0, w: Double = 7.0) : Rectangle(){
 
         onMouseClicked = EventHandler { mouseEvent ->
             //println(type)
+
             if (from != null) {
                 x = mouseEvent.sceneX
                 y = mouseEvent.sceneY - 30
                 to = this
-                println(from.toString() + " + " + to.toString())
+                //println(from.toString() + " + " + to.toString())
 
                 nodes_connect()
             }
+            else if(linked == true){
+                var link_ = (this.parent.parent.parent as AnchorPane).lookupAll("link_in_out").filter{ (it as link_in_out).to?.id == this.id }.first()
+                (this.parent.parent.parent as AnchorPane).children.remove(link_)
+                linked = false
+                this.content = null
+            }
+
         }
     }
 }
@@ -56,10 +64,17 @@ class out_(b: Double = 15.0, w: Double = 7.0) : Rectangle(){
         AnchorPane.setRightAnchor(this, w)
 
         onMouseClicked = EventHandler { mouseEvent ->
-            //println(type)
-            x = mouseEvent.sceneX
-            y = mouseEvent.sceneY - 30
-            from = this
+            if(from?.id == this.id)
+            {
+                from = null
+                println("unselected")
+            }
+            else {
+                println("selected")
+                x = mouseEvent.sceneX
+                y = mouseEvent.sceneY - 30
+                from = this
+            }
         }
     }
 }

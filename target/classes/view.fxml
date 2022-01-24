@@ -46,9 +46,9 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Transform">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Move" />
-                        <MenuItem mnemonicParsing="false" text="Scale" />
-                        <MenuItem mnemonicParsing="false" text="Rotate" />
+                      <MenuItem mnemonicParsing="false" onAction="#create_move_image" text="Move" />
+                        <MenuItem mnemonicParsing="false" onAction="#create_scale_image" text="Scale" />
+                        <MenuItem mnemonicParsing="false" onAction="#create_rotate_image" text="Rotate" />
                     </items>
                   </Menu>
               </items>

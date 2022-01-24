@@ -34,7 +34,7 @@ class MainView : View("Node IMG Editor") {
         node_container.children.add(input_image_node())
         node_container.children.add(output_image_node())
 
-        node_container.children.add(blur_filter_node())
+        node_container.children.add(rotate_node())
     }
 
     fun create_float(){
@@ -79,5 +79,17 @@ class MainView : View("Node IMG Editor") {
 
     fun create_blur_filter(){
         node_container.children.add(blur_filter_node())
+    }
+
+    fun create_move_image(){
+        node_container.children.add(move_node())
+    }
+
+    fun create_scale_image(){
+        node_container.children.add(scale_node())
+    }
+
+    fun create_rotate_image(){
+        node_container.children.add(rotate_node())
     }
 }

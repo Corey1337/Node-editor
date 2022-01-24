@@ -7,7 +7,7 @@ import java.util.*
 fun nodes_connect(){
     if (from?.type != to?.type && from?.var_type == to?.var_type && from?.parent?.parent?.id != to?.parent?.parent?.id && to?.linked == false)
     {
-        println("con")
+        println("connected")
         var par = from?.parent?.parent
         var mot = to?.parent?.parent
         var cont = par?.parent
@@ -20,8 +20,8 @@ fun nodes_connect(){
 
         //(to?.parent?.parent as output_image_node).on_refresh(to?.id)
 
-        println(par?.id)
-        println(cont?.getChildList())
+        //println(par?.id)
+        //println(cont?.getChildList())
 
     }
     else
