@@ -69,7 +69,7 @@ class int_node : DraggableNode(){
 
         node_content.add(int_field)
         int_field.textProperty().addListener { _, oldvalue, newvalue ->
-            if (!newvalue.matches("\\d{0,7}?".toRegex())) {
+            if (newvalue == "" || !newvalue.matches("\\d{0,7}?".toRegex())) {
                 int_field.text = oldvalue;
             }
             out.content = int_field.text.toInt().toString()

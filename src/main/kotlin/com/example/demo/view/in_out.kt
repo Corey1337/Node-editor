@@ -38,7 +38,7 @@ class in_(b: Double = 15.0, w: Double = 7.0) : Rectangle(){
     }
 }
 
-class out_ : Rectangle(){
+class out_(b: Double = 15.0, w: Double = 7.0) : Rectangle(){
     var var_type: String? = null
     var x: Double? = null
     var y: Double? = null
@@ -52,8 +52,8 @@ class out_ : Rectangle(){
         width = 15.0
         height = 15.0
         stroke = Color.AQUA
-        AnchorPane.setRightAnchor(this, 7.0)
-        AnchorPane.setBottomAnchor(this, 15.0)
+        AnchorPane.setBottomAnchor(this, b)
+        AnchorPane.setRightAnchor(this, w)
 
         onMouseClicked = EventHandler { mouseEvent ->
             //println(type)
