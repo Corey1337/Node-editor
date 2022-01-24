@@ -18,16 +18,17 @@ fun nodes_connect(){
 
         cont?.add(con_line)
 
-        (to?.parent?.parent as output_image_node).on_refresh(to?.id)
+        //(to?.parent?.parent as output_image_node).on_refresh(to?.id)
 
         println(par?.id)
         println(cont?.getChildList())
 
-        from = null
-        to = null
     }
     else
         println("nope")
+
+    from = null
+    to = null
 }
 
 class link_in_out(from_: out_?, to_: in_?) : Line() {

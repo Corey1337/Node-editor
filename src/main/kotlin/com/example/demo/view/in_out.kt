@@ -6,7 +6,7 @@ import javafx.scene.paint.Color
 import javafx.scene.shape.Rectangle
 import java.util.*
 
-class in_ : Rectangle(){
+class in_(b: Double = 15.0, w: Double = 7.0) : Rectangle(){
     var var_type: String? = null
     var x: Double? = null
     var y: Double? = null
@@ -21,8 +21,8 @@ class in_ : Rectangle(){
         width = 15.0
         height = 15.0
         stroke = Color.AQUA
-        AnchorPane.setLeftAnchor(this, 7.0)
-        AnchorPane.setBottomAnchor(this, 15.0)
+        AnchorPane.setBottomAnchor(this, b)
+        AnchorPane.setLeftAnchor(this, w)
 
         onMouseClicked = EventHandler { mouseEvent ->
             //println(type)

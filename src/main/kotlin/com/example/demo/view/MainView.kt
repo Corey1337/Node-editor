@@ -33,7 +33,8 @@ class MainView : View("Node IMG Editor") {
 
         node_container.children.add(input_image_node())
         node_container.children.add(output_image_node())
-        //node_container.children.add(add_text_node())
+
+        node_container.children.add(add_text_node())
     }
 
     fun create_float(){

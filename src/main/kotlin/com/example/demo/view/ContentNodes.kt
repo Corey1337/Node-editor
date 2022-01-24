@@ -3,19 +3,18 @@ package com.example.demo.view
 import javafx.application.Platform
 import javafx.embed.swing.SwingFXUtils.toFXImage
 import javafx.event.EventHandler
-import javafx.scene.control.TextField
-import javafx.scene.control.cell.TextFieldTableCell
+import javafx.fxml.FXMLLoader
+import javafx.scene.Parent
+import javafx.scene.Scene
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.Pane
-import javafx.scene.paint.Color
+import javafx.scene.layout.VBox
 import javafx.stage.FileChooser
 import javafx.stage.Stage
-import javafx.util.converter.FloatStringConverter
 import tornadofx.*
 import java.io.File
-import java.util.*
 import javax.imageio.ImageIO
 
 
@@ -145,7 +144,6 @@ class input_image_node : DraggableNode(){
         text = "Select Image"
         AnchorPane.setBottomAnchor(this, 10.0)
         Platform.runLater { AnchorPane.setLeftAnchor(this, (node_content.width/2 - this.width/2).toDouble()) }
-        val abc = 1
     }
     private var image: Image? = null
     private var file: File? = null
@@ -182,12 +180,17 @@ class input_image_node : DraggableNode(){
 
 class output_image_node : DraggableNode(){
     private var image: Image? = null
-    private var file: File? = null
+    private val viewButton = button {
+        text = "View Image"
+        AnchorPane.setBottomAnchor(this, 10.0)
+        Platform.runLater { AnchorPane.setLeftAnchor(this, (node_content.width/2 - this.width/2).toDouble()) }
+    }
 
     init {
         (this.delete_node_but.parent as Pane).children.remove(this.delete_node_but)
 
         node_name.text = "Output"
+        node_content.add(viewButton)
 
         var inp = in_()
         inp.var_type = "image"
@@ -200,10 +203,24 @@ class output_image_node : DraggableNode(){
             this.full_upd()
             this.on_refresh(inp.id)
         }
+
+        viewButton.onAction = EventHandler {
+            val fxmlLoader = FXMLLoader(javaClass.getResource("/image_view.fxml"))
+            val root1 = fxmlLoader.load<Any>() as Parent
+            if(image != null) {
+                ((root1 as VBox).children[0] as ImageView).fitWidth = image?.width!!
+                ((root1 as VBox).children[0] as ImageView).fitHeight = image?.height!!
+            }
+            ((root1 as VBox).children[0] as ImageView).image = image
+            val stage = Stage()
+            stage.scene = Scene(root1)
+            stage.show()
+        }
+
     }
 
     fun on_refresh(id: String?) {
-        (node_content.children.filter { it.id == "ImageView" }.first() as ImageView).image =
-            (node_content.children.filter { it.id == id }.first() as in_).content as Image?
+        image = (node_content.children.filter { it.id == id }.first() as in_).content as Image?
+        (node_content.children.filter { it.id == "ImageView" }.first() as ImageView).image = image
     }
 }
