@@ -21,6 +21,7 @@ class add_text_node : DraggableNode(){
     private var textAdd: String? = null
     private  var x: Int? = null
     private  var y: Int? = null
+    //private  var view: ImageView = (node_content.children.filter { it.id == "ImageView" }.first() as ImageView)
 
     init {
         node_name.text = "Add text"
@@ -35,8 +36,8 @@ class add_text_node : DraggableNode(){
         node_content.add(inp_img) //input node
         node_content.add(label {
             text = "image"
-            AnchorPane.setBottomAnchor(this, 84.0)
-            AnchorPane.setLeftAnchor(this, 25.0)
+            setBottomAnchor(this, 84.0)
+            setLeftAnchor(this, 25.0)
 
         })
 
@@ -46,8 +47,8 @@ class add_text_node : DraggableNode(){
         node_content.add(inp_x) //input node
         node_content.add(label {
             text = "X"
-            AnchorPane.setBottomAnchor(this, 61.0)
-            AnchorPane.setLeftAnchor(this, 25.0)
+            setBottomAnchor(this, 61.0)
+            setLeftAnchor(this, 25.0)
 
         })
 
@@ -57,8 +58,8 @@ class add_text_node : DraggableNode(){
         node_content.add(inp_y) //input node
         node_content.add(label {
             text = "Y"
-            AnchorPane.setBottomAnchor(this, 38.0)
-            AnchorPane.setLeftAnchor(this, 25.0)
+            setBottomAnchor(this, 38.0)
+            setLeftAnchor(this, 25.0)
 
         })
 
@@ -68,19 +69,21 @@ class add_text_node : DraggableNode(){
         node_content.add(inp_add_text) //input node
         node_content.add(label {
             text = "text"
-            AnchorPane.setBottomAnchor(this, 15.0)
-            AnchorPane.setLeftAnchor(this, 25.0)
+            setBottomAnchor(this, 15.0)
+            setLeftAnchor(this, 25.0)
         })
 
 
         this.refresh_node_but.onAction = EventHandler {
             this.full_upd()
             image = (node_content.children.filter { it.id == inp_img.id }.first() as in_).content as Image?
+            textAdd = (node_content.children.filter { it.id == inp_add_text.id }.first() as in_).content as String?
+            x = ((node_content.children.filter { it.id == inp_x.id }.first() as in_).content as String?)?.toInt()
+            y = ((node_content.children.filter { it.id == inp_y.id }.first() as in_).content as String?)?.toInt()
 
-            inp_x.content = ((node_content.children.filter { it.id == inp_x.id }.first() as in_).content as String?)?.toInt()
-            inp_y.content = ((node_content.children.filter { it.id == inp_y.id }.first() as in_).content as String?)?.toInt()
-
-            inp_add_text.content = (node_content.children.filter { it.id == inp_add_text.id }.first() as in_).content as String?
+            inp_x.content = x
+            inp_y.content = y
+            inp_add_text.content = textAdd
 
             image = textToImage(image, inp_x.content as Int?, inp_y.content as Int?,
                 inp_add_text.content as String?)
@@ -91,7 +94,7 @@ class add_text_node : DraggableNode(){
         }
     }
     fun on_refresh(id_img: String?, id_x: String?, id_y: String?, id_add_text: String?) {
-        (node_content.children.filter { it.id == "ImageView" }.first() as ImageView).image = image
+        this.ImageView.image = image
 
     }
 
@@ -126,8 +129,8 @@ class add_image_node : DraggableNode() {
         node_content.add(inp_img) //input node
         node_content.add(label {
             text = "image"
-            AnchorPane.setBottomAnchor(this, 84.0)
-            AnchorPane.setLeftAnchor(this, 25.0)
+            setBottomAnchor(this, 84.0)
+            setLeftAnchor(this, 25.0)
         })
 
 
@@ -136,8 +139,8 @@ class add_image_node : DraggableNode() {
         node_content.add(inp_x) //input node
         node_content.add(label {
             text = "X"
-            AnchorPane.setBottomAnchor(this, 61.0)
-            AnchorPane.setLeftAnchor(this, 25.0)
+            setBottomAnchor(this, 61.0)
+            setLeftAnchor(this, 25.0)
         })
 
 
@@ -146,8 +149,8 @@ class add_image_node : DraggableNode() {
         node_content.add(inp_y) //input node
         node_content.add(label {
             text = "Y"
-            AnchorPane.setBottomAnchor(this, 38.0)
-            AnchorPane.setLeftAnchor(this, 25.0)
+            setBottomAnchor(this, 38.0)
+            setLeftAnchor(this, 25.0)
         })
 
 
@@ -156,18 +159,20 @@ class add_image_node : DraggableNode() {
         node_content.add(inp_add_img) //input node
         node_content.add(label {
             text = "add image"
-            AnchorPane.setBottomAnchor(this, 15.0)
-            AnchorPane.setLeftAnchor(this, 25.0)
+            setBottomAnchor(this, 15.0)
+            setLeftAnchor(this, 25.0)
         })
 
         this.refresh_node_but.onAction = EventHandler {
             this.full_upd()
             image = (node_content.children.filter { it.id == inp_img.id }.first() as in_).content as Image?
+            x = ((node_content.children.filter { it.id == inp_x.id }.first() as in_).content as String?)?.toInt()
+            y = ((node_content.children.filter { it.id == inp_y.id }.first() as in_).content as String?)?.toInt()
+            imageAdd = (node_content.children.filter { it.id == inp_add_img.id }.first() as in_).content as Image?
 
-            inp_x.content = ((node_content.children.filter { it.id == inp_x.id }.first() as in_).content as String?)?.toInt()
-            inp_y.content = ((node_content.children.filter { it.id == inp_y.id }.first() as in_).content as String?)?.toInt()
-
-            inp_add_img.content = (node_content.children.filter { it.id == inp_add_img.id }.first() as in_).content as Image?
+            inp_x.content = x
+            inp_y.content = y
+            inp_add_img.content = imageAdd
 
             image = ImageToImage(image, inp_x.content as Int?, inp_y.content as Int?,
                 inp_add_img.content as Image?)
@@ -178,7 +183,7 @@ class add_image_node : DraggableNode() {
         }
     }
     fun on_refresh(id_img: String?, id_x: String?, id_y: String?, id_add_img: String?) {
-        (node_content.children.filter { it.id == "ImageView" }.first() as ImageView).image = image
+        this.ImageView.image = image
     }
 
     private fun ImageToImage(image: Image?, x: Int?, y: Int?, add_img: Image?): WritableImage? {

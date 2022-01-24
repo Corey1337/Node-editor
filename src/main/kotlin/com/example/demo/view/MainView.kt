@@ -34,7 +34,7 @@ class MainView : View("Node IMG Editor") {
         node_container.children.add(input_image_node())
         node_container.children.add(output_image_node())
 
-        node_container.children.add(add_text_node())
+        node_container.children.add(blur_filter_node())
     }
 
     fun create_float(){
@@ -59,5 +59,25 @@ class MainView : View("Node IMG Editor") {
 
     fun create_add_image(){
         node_container.children.add(add_image_node())
+    }
+
+    fun create_gray_filter(){
+        node_container.children.add(gray_filter_node())
+    }
+
+    fun create_bright_filter(){
+        node_container.children.add(bright_filter_node())
+    }
+
+    fun create_sepia_filter(){
+        node_container.children.add(sepia_filter_node())
+    }
+
+    fun create_invert_colors_filter(){
+        node_container.children.add(invert_colors_filter_node())
+    }
+
+    fun create_blur_filter(){
+        node_container.children.add(blur_filter_node())
     }
 }

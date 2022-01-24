@@ -37,11 +37,11 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Filters">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Grey" />
-                        <MenuItem mnemonicParsing="false" text="Bright" />
-                        <MenuItem mnemonicParsing="false" text="Sepia" />
-                        <MenuItem mnemonicParsing="false" text="Invert colors" />
-                        <MenuItem mnemonicParsing="false" text="Blur" />
+                      <MenuItem mnemonicParsing="false" onAction="#create_gray_filter" text="Gray" />
+                        <MenuItem mnemonicParsing="false" onAction="#create_bright_filter" text="Bright" />
+                        <MenuItem mnemonicParsing="false" onAction="#create_sepia_filter" text="Sepia" />
+                        <MenuItem mnemonicParsing="false" onAction="#create_invert_colors_filter" text="Invert colors" />
+                        <MenuItem mnemonicParsing="false" onAction="#create_blur_filter" text="Blur" />
                     </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Transform">

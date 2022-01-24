@@ -86,16 +86,16 @@ open class DraggableNode: AnchorPane() {
 
     fun on_delete(){
 
-        var all_links_ = node_layout.parent.lookupAll("link_in_out").filter{ (it as link_in_out).from?.parent?.parent?.id == id || (it as link_in_out).to?.parent?.parent?.id == id}
+        var all_links_ = node_layout.parent.lookupAll("link_in_out").filter{ (it as link_in_out).from?.parent?.parent?.id == id || it.to?.parent?.parent?.id == id}
         //var all_links_in = node_layout.parent.lookupAll("link_in_out").filter{  }
         if(all_links_.size != 0){
             for(link_ in all_links_){
                 (link_ as link_in_out).to?.linked = false
-                (link_ as link_in_out).to?.content = null
+                link_.to?.content = null
                 (this.parent as Pane).children.remove(link_)
             }
         }
-        
+
         (this.parent as Pane).children.remove(this)
 
     }

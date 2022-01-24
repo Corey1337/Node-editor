@@ -20,9 +20,9 @@ import javax.imageio.ImageIO
 
 class float_node : DraggableNode(){
     private val float_field = textfield {
-        AnchorPane.setLeftAnchor(this, 10.0)
-        AnchorPane.setRightAnchor(this, 10.0)
-        AnchorPane.setTopAnchor(this, 60.0)
+        setLeftAnchor(this, 10.0)
+        setRightAnchor(this, 10.0)
+        setTopAnchor(this, 60.0)
         text = "0.0"
     }
 
@@ -40,7 +40,7 @@ class float_node : DraggableNode(){
         node_content.add(out) //output node
 
         float_field.textProperty().addListener { _, oldvalue, newvalue ->
-            if (!newvalue.matches("\\d{0,7}([\\.]\\d{0,4})?".toRegex())) {
+            if (newvalue == "" || !newvalue.matches("\\d{0,7}([\\.]\\d{0,4})?".toRegex())) {
                 float_field.text = oldvalue;
             }
             out.content = float_field.text.toDouble().toString()
@@ -50,9 +50,9 @@ class float_node : DraggableNode(){
 
 class int_node : DraggableNode(){
     private val int_field = textfield {
-        AnchorPane.setLeftAnchor(this, 10.0)
-        AnchorPane.setRightAnchor(this, 10.0)
-        AnchorPane.setTopAnchor(this, 60.0)
+        setLeftAnchor(this, 10.0)
+        setRightAnchor(this, 10.0)
+        setTopAnchor(this, 60.0)
         text = "0"
     }
 
@@ -79,9 +79,9 @@ class int_node : DraggableNode(){
 
 class string_node : DraggableNode(){
     private val string_field = textfield {
-        AnchorPane.setLeftAnchor(this, 10.0)
-        AnchorPane.setRightAnchor(this, 10.0)
-        AnchorPane.setTopAnchor(this, 60.0)
+        setLeftAnchor(this, 10.0)
+        setRightAnchor(this, 10.0)
+        setTopAnchor(this, 60.0)
     }
     init {
         (this.refresh_node_but.parent as Pane).children.remove(this.refresh_node_but)
@@ -105,8 +105,8 @@ class string_node : DraggableNode(){
 class image_node : DraggableNode(){
     private val fileButton = button {
         text = "Select Image"
-        AnchorPane.setBottomAnchor(this, 10.0)
-        Platform.runLater { AnchorPane.setLeftAnchor(this, (node_content.width/2 - this.width/2).toDouble()) }
+        setBottomAnchor(this, 10.0)
+        Platform.runLater { setLeftAnchor(this, (node_content.width/2 - this.width/2)) }
 
     }
     private var image: Image? = null
@@ -142,8 +142,8 @@ class image_node : DraggableNode(){
 class input_image_node : DraggableNode(){
     private val fileButton = button {
         text = "Select Image"
-        AnchorPane.setBottomAnchor(this, 10.0)
-        Platform.runLater { AnchorPane.setLeftAnchor(this, (node_content.width/2 - this.width/2).toDouble()) }
+        setBottomAnchor(this, 10.0)
+        Platform.runLater { setLeftAnchor(this, (node_content.width/2 - this.width/2)) }
     }
     private var image: Image? = null
     private var file: File? = null
@@ -182,8 +182,8 @@ class output_image_node : DraggableNode(){
     private var image: Image? = null
     private val viewButton = button {
         text = "View Image"
-        AnchorPane.setBottomAnchor(this, 10.0)
-        Platform.runLater { AnchorPane.setLeftAnchor(this, (node_content.width/2 - this.width/2).toDouble()) }
+        setBottomAnchor(this, 10.0)
+        Platform.runLater { setLeftAnchor(this, (node_content.width/2 - this.width/2)) }
     }
 
     init {
