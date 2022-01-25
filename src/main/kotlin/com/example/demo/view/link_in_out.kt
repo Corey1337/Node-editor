@@ -7,16 +7,13 @@ import java.util.*
 fun nodes_connect(){
     if (from?.type != to?.type && from?.var_type == to?.var_type && from?.parent?.parent?.id != to?.parent?.parent?.id && to?.linked == false)
     {
-        println("connected")
         var par = from?.parent?.parent
-        var mot = to?.parent?.parent
         var cont = par?.parent
-        to?.linked = true
-        to?.content = from?.content
 
         var con_line = link_in_out(from, to)
-
         cont?.add(con_line)
+
+        println("connected")
 
         //(to?.parent?.parent as output_image_node).on_refresh(to?.id)
 
@@ -45,6 +42,14 @@ class link_in_out(from_: out_?, to_: in_?) : Line() {
         startY = from?.y!!
         endX = to?.x!!
         endY = to?.y!!
+
+        (from!!.parent.parent as DraggableNode).refresh_node_but.fire()
+        (to!!.parent.parent as DraggableNode).refresh_node_but.fire()
+        to?.linked = true
+        to?.content = from?.content
+        (from!!.parent.parent as DraggableNode).refresh_node_but.fire()
+        (to!!.parent.parent as DraggableNode).refresh_node_but.fire()
+
     }
 
     fun update_content(){

@@ -90,6 +90,7 @@ class add_text_node : DraggableNode(){
 
             out.content = image
 
+            this.full_upd()
             this.on_refresh(inp_img.id, inp_x.id, inp_y.id, inp_add_text.id)
         }
     }
@@ -179,6 +180,7 @@ class add_image_node : DraggableNode() {
 
             out.content = image
 
+            this.full_upd()
             this.on_refresh(inp_img.id, inp_x.id, inp_y.id, inp_add_img.id)
         }
     }

@@ -12,9 +12,9 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Open scene" />
+            <MenuItem mnemonicParsing="false" text="Save scene" />
+            <MenuItem mnemonicParsing="false" onAction="#on_save" text="Save image" />
             <MenuItem mnemonicParsing="false" text="Save As…" />
             <MenuItem mnemonicParsing="false" text="Quit" />
           </items>

@@ -44,6 +44,7 @@ class float_node : DraggableNode(){
                 float_field.text = oldvalue;
             }
             out.content = float_field.text.toDouble().toString()
+            this.full_upd()
         }
     }
 }
@@ -73,6 +74,7 @@ class int_node : DraggableNode(){
                 int_field.text = oldvalue;
             }
             out.content = int_field.text.toInt().toString()
+            this.full_upd()
         }
     }
 }
@@ -98,6 +100,7 @@ class string_node : DraggableNode(){
 
         string_field.textProperty().addListener { _, oldvalue, newvalue ->
             out.content = string_field.text
+            this.full_upd()
         }
     }
 }
@@ -134,6 +137,7 @@ class image_node : DraggableNode(){
             if(image !== null){
                 this.ImageView.image = image
                 out.content = image
+                this.full_upd()
             }
         }
     }
@@ -168,11 +172,13 @@ class input_image_node : DraggableNode(){
             this.file = fileChooser.showOpenDialog(Stage())
             try{
                 image = toFXImage(ImageIO.read(this.file), null)
+
             }
             catch (e: Exception) { }
             if(image !== null){
                 this.ImageView.image = image
                 out.content = image
+                this.full_upd()
             }
         }
     }
@@ -201,6 +207,7 @@ class output_image_node : DraggableNode(){
 
         this.refresh_node_but.onAction = EventHandler {
             this.full_upd()
+
             this.on_refresh(inp.id)
         }
 

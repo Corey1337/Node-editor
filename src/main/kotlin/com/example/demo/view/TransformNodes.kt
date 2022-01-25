@@ -66,6 +66,7 @@ class move_node : DraggableNode(){
 
             out.content = image
 
+            this.full_upd()
             this.on_refresh(inp_img.id, inp_x.id, inp_y.id)
         }
     }
@@ -142,6 +143,7 @@ class scale_node : DraggableNode(){
 
             out.content = image
 
+            this.full_upd()
             this.on_refresh(inp_img.id, inp_x.id, inp_y.id)
         }
     }
@@ -209,6 +211,7 @@ class rotate_node : DraggableNode(){
 
             out.content = image
 
+            this.full_upd()
             this.on_refresh(inp_img.id, inp_rad.id)
         }
 

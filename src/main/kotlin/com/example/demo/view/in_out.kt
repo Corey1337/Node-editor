@@ -40,6 +40,7 @@ class in_(b: Double = 15.0, w: Double = 7.0) : Rectangle(){
                 (this.parent.parent.parent as AnchorPane).children.remove(link_)
                 linked = false
                 this.content = null
+                (this.parent.parent as DraggableNode).refresh_node_but.fire()
             }
 
         }

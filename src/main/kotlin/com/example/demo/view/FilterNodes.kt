@@ -41,6 +41,7 @@ class gray_filter_node : DraggableNode(){
             image = image_gray(image)
             out.content = image
 
+            this.full_upd()
             this.on_refresh(inp.id)
         }
     }
@@ -104,6 +105,7 @@ class bright_filter_node : DraggableNode(){
             image = image_bright(image)
             out.content = image
 
+            this.full_upd()
             this.on_refresh(inp_img.id, inp_float.id)
         }
     }
@@ -167,6 +169,7 @@ class sepia_filter_node : DraggableNode(){
             image = image_sepia(image)
             out.content = image
 
+            this.full_upd()
             this.on_refresh(inp_img.id, inp_float.id)
         }
     }
@@ -218,6 +221,7 @@ class invert_colors_filter_node : DraggableNode(){
             image = image_negative(image)
             out.content = image
 
+            this.full_upd()
             this.on_refresh(inp_img.id)
         }
     }
@@ -285,6 +289,7 @@ class blur_filter_node : DraggableNode(){
             image = image_blur(image)
             out.content = image
 
+            this.full_upd()
             this.on_refresh(inp_img.id, inp_float.id)
         }
     }

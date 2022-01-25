@@ -1,11 +1,13 @@
 package com.example.demo.view
 
 import com.example.demo.app.Styles
+import javafx.embed.swing.SwingFXUtils.fromFXImage
 import javafx.event.EventHandler
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.Node
 import javafx.scene.Parent
+import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.image.ImageView
@@ -19,6 +21,9 @@ import javafx.scene.shape.CubicCurve
 import javafx.scene.shape.Line
 import javafx.scene.shape.Rectangle
 import tornadofx.*
+import java.io.File
+import java.io.IOException
+import javax.imageio.ImageIO
 
 var from: out_? = null
 var to: in_? = null
@@ -35,6 +40,20 @@ class MainView : View("Node IMG Editor") {
         node_container.children.add(output_image_node())
 
         node_container.children.add(rotate_node())
+    }
+
+    fun on_save(){
+        var out = (node_container.lookupAll("output_image_node").first() as output_image_node).ImageView.image
+        var file: File = File("C:\\Users\\Corey\\Desktop\\pic.png")
+        try{
+            ImageIO.write(fromFXImage(out, null), "png", file)
+        } catch (e: Exception){
+            val alert = Alert(Alert.AlertType.ERROR)
+            alert.title = "Error"
+            alert.headerText = null
+            alert.contentText = "Failed to save pic: $e"
+            alert.showAndWait()
+        }
     }
 
     fun create_float(){

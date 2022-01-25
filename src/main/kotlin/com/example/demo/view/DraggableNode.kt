@@ -101,12 +101,17 @@ open class DraggableNode: AnchorPane() {
     }
 
     fun full_upd(){
-        //var all_links_out = node_layout.parent.lookupAll("link_in_out").filter{ (it as link_in_out).from?.parent?.parent?.id == id }
         var all_links_in = node_layout.parent.lookupAll("link_in_out").filter{ (it as link_in_out).to?.parent?.parent?.id == id }
-
-        if(all_links_in.size != 0){
-            for(link_in in all_links_in){
+        if (all_links_in.size != 0) {
+            for (link_in in all_links_in) {
                 (link_in as link_in_out).update_content()
+            }
+        }
+
+        var all_links_out = node_layout.parent.lookupAll("link_in_out").filter{ (it as link_in_out).from?.parent?.parent?.id == id }
+        if(all_links_out.size != 0) {
+            for(link_out in all_links_out){
+                ((link_out as link_in_out).to?.parent?.parent as DraggableNode).refresh_node_but.fire()
             }
         }
     }
